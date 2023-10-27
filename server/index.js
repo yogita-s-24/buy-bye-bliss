@@ -149,8 +149,43 @@ app.delete("/product/:id", async (req, res) => {
   });
 });
 
-//GET - get/product/search/query
 
+// //PUT - put/product/:id
+
+app.put('/product/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const { name, price, description, category, quantity, image, brand } = req.body;
+
+  await Product.updateOne({ _id: id }, {
+    $set: {
+      name,
+      price,
+      description,
+      category,
+      quantity,
+      image,
+      brand
+    }
+  })
+
+  try{
+    const findProduct = await Product.findOne({ _id : id});
+    res.json({
+      success: true,
+      data: findProduct,
+      message: 'Product updated successfully.'
+    })
+  }
+  catch(err){
+    res.json({
+    success : false,
+    message : "Not find updated product."
+    })
+  }
+})
+
+//GET - get/product/search/query
 
 //port
 const PORT = process.env.PROT || 5000;
