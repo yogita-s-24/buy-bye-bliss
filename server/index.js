@@ -109,15 +109,13 @@ app.post("/product", async (req, res) => {
 
   try {
     const saveproduct = await newproduct.save();
-    
+
     res.json({
       success: true,
       data: saveproduct,
       message: "Product created successfuly",
     });
-  } 
-  catch (err) {
-
+  } catch (err) {
     res.json({
       success: false,
       error: err,
@@ -126,6 +124,18 @@ app.post("/product", async (req, res) => {
 });
 
 //GET - get/product/:id
+
+app.get('/product/:id', async (req,res)=>{
+  const { id } = req.params;
+
+  const findProduct = await Product.findById( {_id : id });
+
+  res.json({
+    success:true,
+    data : findProduct,
+    message : "Product find successful using ID."
+  })
+})
 
 //GET - get/product/search/query
 
