@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+//models
 import User from "./models/User.js";
+import Product from "./models/Product.js";
 
 const app = express();
 
@@ -81,6 +83,27 @@ app.post("/signup", async (req, res) => {
     });
   }
 });
+
+//GET  - get/products
+app.get('/products',async (req, res)=>{
+ const allproducts = await Product.find();
+
+ res.json({
+  success:true,
+  data:allproducts,
+  message : "All products get successfully"
+ })
+
+ 
+})
+
+//POST - post/product
+
+//GET - get/product/:id
+
+//GET - get/product/search/query
+
+//PUT - put/product/:id
 
 //port
 const PORT = process.env.PROT || 5000;
