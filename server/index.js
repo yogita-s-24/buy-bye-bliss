@@ -125,21 +125,32 @@ app.post("/product", async (req, res) => {
 
 //GET - get/product/:id
 
-app.get('/product/:id', async (req,res)=>{
+app.get("/product/:id", async (req, res) => {
   const { id } = req.params;
 
-  const findProduct = await Product.findById( {_id : id });
+  const findProduct = await Product.findById({ _id: id });
 
   res.json({
-    success:true,
-    data : findProduct,
-    message : "Product find successful using ID."
-  })
-})
+    success: true,
+    data: findProduct,
+    message: "Product find successful using ID.",
+  });
+});
+
+//DELETE - delete/product/:id
+
+app.delete("/product/:id", async (req, res) => {
+  const { id } = req.params;
+  await Product.deleteOne({ _id: id });
+
+  res.json({
+    success: true,
+    message: "Product deleted successfuly",
+  });
+});
 
 //GET - get/product/search/query
 
-//PUT - put/product/:id
 
 //port
 const PORT = process.env.PROT || 5000;
