@@ -24,11 +24,10 @@ connectMongoDB();
 
 //Post/login
 app.post("/login", async (req, res) => {
-
   const { email, password } = req.body;
 
   if (!email || !password) {
-   return res.json({
+    return res.json({
       success: false,
       message: "Please provide email and password",
     });
@@ -36,22 +35,20 @@ app.post("/login", async (req, res) => {
 
   const user = await User.findOne({
     email: email,
-    password : password
-  })
+    password: password,
+  });
 
-  if(user){
+  if (user) {
     return res.json({
       success: true,
-      data :user,
-      message:"Login successful"
+      data: user,
+      message: "Login successful",
     });
-    }
-    else
-    {
-      return res.json({
-        success:false,
-        message:'Invalid credentials'
-        })
+  } else {
+    return res.json({
+      success: false,
+      message: "Invalid credentials",
+    });
   }
 });
 
@@ -85,19 +82,48 @@ app.post("/signup", async (req, res) => {
 });
 
 //GET  - get/products
-app.get('/products',async (req, res)=>{
- const allproducts = await Product.find();
+app.get("/products", async (req, res) => {
+  const allproducts = await Product.find();
 
- res.json({
-  success:true,
-  data:allproducts,
-  message : "All products get successfully"
- })
-
- 
-})
+  res.json({
+    success: true,
+    data: allproducts,
+    message: "All products get successfully",
+  });
+});
 
 //POST - post/product
+
+app.post("/product", async (req, res) => {
+  const { name, description, price, image, category, brand } = req.body;
+
+  //instance
+  const newproduct = new Product({
+    name: name,
+    description: description,
+    price: price,
+    image: image,
+    category: category,
+    brand: brand,
+  });
+
+  try {
+    const saveproduct = await newproduct.save();
+    
+    res.json({
+      success: true,
+      data: saveproduct,
+      message: "Product created successfuly",
+    });
+  } 
+  catch (err) {
+
+    res.json({
+      success: false,
+      error: err,
+    });
+  }
+});
 
 //GET - get/product/:id
 
