@@ -187,6 +187,19 @@ app.put('/product/:id', async (req, res) => {
 
 //GET - get/product/search/query
 
+app.get('/search', async (req,res)=>{
+
+  const { q } = req.query;
+
+  const productSearch = await Product.findOne({name: { $regex : q, $options : 'i'}})
+
+    res.json({
+      success:true,
+      data:productSearch,
+      message:"Product fetch Successfully"
+    })
+});
+
 //port
 const PORT = process.env.PROT || 5000;
 
