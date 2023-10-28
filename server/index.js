@@ -152,84 +152,98 @@ app.delete("/product/:id", async (req, res) => {
 
 // //PUT - put/product/:id
 
-app.put('/product/:id', async (req, res) => {
+app.put("/product/:id", async (req, res) => {
   const { id } = req.params;
 
-  const { name, price, description, category, quantity, image, brand } = req.body;
+  const { name, price, description, category, quantity, image, brand } =
+    req.body;
 
-  await Product.updateOne({ _id: id }, {
-    $set: {
-      name,
-      price,
-      description,
-      category,
-      quantity,
-      image,
-      brand
+  await Product.updateOne(
+    { _id: id },
+    {
+      $set: {
+        name,
+        price,
+        description,
+        category,
+        quantity,
+        image,
+        brand,
+      },
     }
-  })
+  );
 
-  try{
-    const findProduct = await Product.findOne({ _id : id});
+  try {
+    const findProduct = await Product.findOne({ _id: id });
     res.json({
       success: true,
       data: findProduct,
-      message: 'Product updated successfully.'
-    })
-  }
-  catch(err){
+      message: "Product updated successfully.",
+    });
+  } catch (err) {
     res.json({
-    success : false,
-    message : "Not find updated product."
-    })
+      success: false,
+      message: "Not find updated product.",
+    });
   }
-})
+});
 
 //GET - get/product/search/query
 
-app.get('/search', async (req,res)=>{
-
+app.get("/search", async (req, res) => {
   const { q } = req.query;
 
-  const productSearch = await Product.findOne({name: { $regex : q, $options : 'i'}})
+  const productSearch = await Product.findOne({
+    name: { $regex: q, $options: "i" },
+  });
 
-    res.json({
-      success:true,
-      data:productSearch,
-      message:"Product fetch Successfully"
-    })
+  res.json({
+    success: true,
+    data: productSearch,
+    message: "Product fetch Successfully",
+  });
 });
 
-//POST - /order
+// //POST - /order
+app.post("/order", async (req, res) => {
+  const { user, product, quantity, price, deliveryCharges, shippingAddress } =
+    req.body;
 
-app.post("/order", async (req,res)=>{
- const {user, product, quantity, price, deliveryCharges, shippingAddress} = req.body;
+  const order = new Order({
+    user,
+    product,
+    quantity,
+    price,
+    deliveryCharges,
+    shippingAddress,
+  });
 
-const order  = new Order({
-  user,
-  product,
-  quantity,
-  price,
-  deliveryCharges,
-  shippingAddress
-}).populate("user product");
+  try {
+    const saveUserOrder = await order.save();
+    res.json({
+      success: true,
+      data: saveUserOrder,
+      message: "Order save Successfuly.",
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
 
-// try{
-  const saveUserOrder = await order.save();
+//GET /orders/:id
+app.get("/order/:id", async (req, res) => {
+  const { id } = req.params;
+  const findOrder = await Order.findById(id).populate("user product");
+  findOrder.user.password = undefined;
   res.json({
-    success : true,
-    data: saveUserOrder,
-    message : "Order save Successfuly."
-  })
-// }
-// catch(err){
-//   res.json({
-//     success : true,
-//     message : "Order not savee Successfuly."
-//   })
-// }
-})
-
+    success: true,
+    data: findOrder,
+    message: "Order successfully found",
+  });
+});
 
 //port
 const PORT = process.env.PROT || 5000;
