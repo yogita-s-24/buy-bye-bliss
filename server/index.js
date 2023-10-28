@@ -237,13 +237,51 @@ app.post("/order", async (req, res) => {
 app.get("/order/:id", async (req, res) => {
   const { id } = req.params;
   const findOrder = await Order.findById(id).populate("user product");
+
+  //This not show in order
   findOrder.user.password = undefined;
+
   res.json({
     success: true,
     data: findOrder,
     message: "Order successfully found",
   }).populate("user product");
 });
+
+//GET - /orders/user/:id
+
+app.get("/order/user/:id", async(req,res)=>{
+
+});
+
+//PATCH - /order/status/:id
+
+//GET - /orders
+
+app.get("/orders", async(req,res)=>{
+
+  const allOrders = await Order.find().populate("user product");
+
+  allOrders.forEach((order)=>{
+    order.user.password = undefined;
+  });
+
+  try{
+    res.json({
+      success:true,
+      data : allOrders,
+      message:"Orders fetched successfuly"
+    });
+  }
+  catch(error){
+    res.json({
+      success:false,
+      message:"Orders not fetched successfuly"
+    });
+  }
+});
+
+
 
 //port
 const PORT = process.env.PROT || 5000;
