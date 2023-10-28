@@ -6,6 +6,7 @@ dotenv.config();
 //models
 import User from "./models/User.js";
 import Product from "./models/Product.js";
+import Order from "./models/Order.js";
 
 const app = express();
 
@@ -149,7 +150,6 @@ app.delete("/product/:id", async (req, res) => {
   });
 });
 
-
 // //PUT - put/product/:id
 
 app.put('/product/:id', async (req, res) => {
@@ -199,6 +199,37 @@ app.get('/search', async (req,res)=>{
       message:"Product fetch Successfully"
     })
 });
+
+//POST - /order
+
+app.post("/order", async (req,res)=>{
+ const {user, product, quantity, price, deliveryCharges, shippingAddress} = req.body;
+
+const order  = new Order({
+  user,
+  product,
+  quantity,
+  price,
+  deliveryCharges,
+  shippingAddress
+}).populate("user product");
+
+// try{
+  const saveUserOrder = await order.save();
+  res.json({
+    success : true,
+    data: saveUserOrder,
+    message : "Order save Successfuly."
+  })
+// }
+// catch(err){
+//   res.json({
+//     success : true,
+//     message : "Order not savee Successfuly."
+//   })
+// }
+})
+
 
 //port
 const PORT = process.env.PROT || 5000;
