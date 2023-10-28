@@ -252,7 +252,16 @@ app.get("/order/:id", async (req, res) => {
 
 //GET - /orders/user/:id
 
-app.get("/order/user/:id", async (req, res) => { });
+app.get("/order/user/:id", async (req, res) => { 
+  const { id } = req.params;
+  const ordersByUserId = await Order.find({user : id}).populate("user product");
+
+  res.json({
+    success: true,
+    count: ordersByUserId,
+    message: "Orders by User ID"
+  })
+});
 
 //PATCH - /order/status/:id
 app.patch("/order/status/:id", async (req, res) => {
