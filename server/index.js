@@ -241,47 +241,55 @@ app.get("/order/:id", async (req, res) => {
   //This not show in order
   findOrder.user.password = undefined;
 
-  res.json({
-    success: true,
-    data: findOrder,
-    message: "Order successfully found",
-  }).populate("user product");
+  res
+    .json({
+      success: true,
+      data: findOrder,
+      message: "Order successfully found",
+    })
+    .populate("user product");
 });
 
 //GET - /orders/user/:id
 
-app.get("/order/user/:id", async(req,res)=>{
-
-});
+app.get("/order/user/:id", async (req, res) => { });
 
 //PATCH - /order/status/:id
+app.patch("/order/status/:id", async (req, res) => {
+  const { id } = req.params;
+  const {status} = req.body;
+
+ await Order.updateOne(
+    { _id: id }, { $set: {status:status} }).populate("user product");
+
+  res.json({
+    success: true,
+    message: "Order status updated",
+  });
+});
 
 //GET - /orders
 
-app.get("/orders", async(req,res)=>{
-
+app.get("/orders", async (req, res) => {
   const allOrders = await Order.find().populate("user product");
 
-  allOrders.forEach((order)=>{
+  allOrders.forEach((order) => {
     order.user.password = undefined;
   });
 
-  try{
+  try {
     res.json({
-      success:true,
-      data : allOrders,
-      message:"Orders fetched successfuly"
+      success: true,
+      data: allOrders,
+      message: "Orders fetched successfuly",
     });
-  }
-  catch(error){
+  } catch (error) {
     res.json({
-      success:false,
-      message:"Orders not fetched successfuly"
+      success: false,
+      message: "Orders not fetched successfuly",
     });
   }
 });
-
-
 
 //port
 const PORT = process.env.PROT || 5000;
