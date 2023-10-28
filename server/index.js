@@ -242,7 +242,7 @@ app.get("/order/:id", async (req, res) => {
     success: true,
     data: findOrder,
     message: "Order successfully found",
-  });
+  }).populate("user product");
 });
 
 //port
