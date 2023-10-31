@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
 import showToast from "crunchy-toast";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,13 +11,16 @@ function Login() {
 
   const loginUser = async () =>{
     if(email === ""){
-      showToast('Please field password',"alert",3000);
+      showToast(response.data.message,"alert",3000);
     }
 
     if(password === ""){
-      showToast('Please field Email',"alert",3000);
+      showToast(response.data.message ,"alert",3000);
     }
-    const response = await axios.post("/login",{email,password});
+    const response = await axios.post("/login",{
+      email,
+      password
+    });
 
     console.log(response?.data);
 
@@ -30,17 +34,23 @@ function Login() {
     }
   }
   
+  useEffect(()=>{
+    const storageUser = JSON.parse(localStorage.getItem('user') || '{}');
+    if(storageUser?.email){
+     alert('You are already Logged In.');
+      window.location.href='/';
+    }
+  },[]);
 
   return (
     <div>
-      <section class="form mx-5 my-4">
+      <Navbar/>
+      <section class="form mx-2 my-4">
         <div class="container w-50 ">
-          <div class="row border shadow ">
-            <h1 className="text-center">
-              <i>"Buy-Bye-Bliss"</i>
-            </h1>
-            <h2 className="text-center text-secondary">Login Here </h2>
-            <div className="mt-3">
+          <div class="row shadow rounded-3 mx-auto" style={{border:"1px solid grey", width:"28rem"}} >
+          <h3 className="text-center mt-4"><i>"Buy-Bye-Bliss Shopee"</i> </h3>
+              <h4 className="text-center text-secondary">Login Here </h4>
+            <div className="mt-3 w-75 mx-auto">
               <input
                 type="email"
                 className="form-control"
@@ -51,7 +61,7 @@ function Login() {
               />
             </div>
 
-            <div className="mt-3">
+            <div className="mt-3 w-75 mx-auto">
               <input
                 type="password"
                 className="form-control "
@@ -63,7 +73,7 @@ function Login() {
             </div>
 
             <div className="text-center">
-              <button type="button" className="btn btn-primary my-3 px-5" onClick={loginUser}>
+              <button type="button" className="btn btn-primary my-4 px-5" onClick={loginUser}>
                 <b>Login </b>
               </button>
               <p className="text-center">
@@ -73,7 +83,14 @@ function Login() {
           </div>
         </div>
       </section>
-    </div>
+      
+
+
+       
+
+      </div>
+     
+  
   );
 }
 

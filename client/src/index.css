@@ -3,5 +3,17 @@
 }
 
 body{
-    background-color: rgb(29, 159, 12);
+    /* background-color: #e6f0ff !important; */
+}
+
+.text-decoration{
+    text-decoration: none !important;
+}
+
+input{
+    border:1px solid #000 !important;
+}
+
+::placeholder{
+    color: #7d7dea !important;
 }

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import showToast from "crunchy-toast";
 import "./Signup.css";
 import SignUpImg from "./../Signup/shopping.png";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -15,23 +16,23 @@ function SignUp() {
 
   async function signupUser() {
     if (!name) {
-      showToast("name is required", "alert", 5000);
+      showToast("Name is required", "alert", 5000);
       return;
     }
     if (!email) {
-      showToast("email is required", "alert", 5000);
+      showToast("Email is required", "alert", 5000);
       return;
     }
     if (!password) {
-      showToast("password is required", "alert", 5000);
+      showToast("Password is required", "alert", 5000);
       return;
     }
     if (!mobile) {
-      showToast("mobile number is required", "alert", 5000);
+      showToast("Mobile number is required", "alert", 5000);
       return;
     }
     if (!address) {
-      showToast("address is required", "alert", 4000);
+      showToast("Address is required", "alert", 4000);
       return;
     }
     const response = await axios.post("/signup", {
@@ -48,8 +49,10 @@ function SignUp() {
       showToast(response.data.message, "success", 3000);
 
       window.location.href = "/login";
-    } else {
+    } 
+    else {
       showToast(response.data.message, "alert", 3000);
+
       setName("");
       setEmail("");
       setMobile("");
@@ -57,11 +60,21 @@ function SignUp() {
       setAddress("");
     }
   }
+
+  useEffect(()=>{
+    const storageUser = JSON.parse(localStorage.getItem('user') || '{}');
+    if(storageUser?.email){
+     alert('You are already Logged In.');
+      window.location.href='/';
+    }
+  },[]);
+
   return (
     <>
-      <section class="form mx-5 my-4 ">
+    <Navbar/>
+      <section class="form mx-3 my-4">
         <div class="container">
-          <div class="row border shadow ">
+          <div class="row rounded-3 shadow bg-light" style={{border:"1px solid grey "}}>
             <div class="col-lg-6">
               <img
                 src={SignUpImg}
@@ -71,9 +84,9 @@ function SignUp() {
               />
             </div>
 
-            <div class="col-lg-6 pt-5 px-5">
-              <h1 className="text-center"><i>"Buy-Bye-Bliss"</i> </h1>
-              <h2 className="text-center text-secondary">SignUp Here </h2>
+            <div class="col-lg-6 pt-3 px-5">
+              <h3 className="text-center"><i>"Buy-Bye-Bliss Shopee"</i> </h3>
+              <h4 className="text-center text-secondary">SignUp Here </h4>
               <form>
                 <div className="mt-3">
                   <input
