@@ -241,8 +241,7 @@ app.get("/order/:id", async (req, res) => {
   //This not show in order
   findOrder.user.password = undefined;
 
-  res
-    .json({
+  res.json({
       success: true,
       data: findOrder,
       message: "Order successfully found",
@@ -251,6 +250,7 @@ app.get("/order/:id", async (req, res) => {
 });
 
 //GET - /orders/user/:id
+//how many orders are ordered by one user
 
 app.get("/order/user/:id", async (req, res) => { 
   const { id } = req.params;
