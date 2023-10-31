@@ -12,7 +12,7 @@ function MyOrder() {
             }
         }
         else{
-         alert('You are already Logged in!');
+         alert('Please login first 👍');
           window.location.href='/login';
         }
       },[]);
