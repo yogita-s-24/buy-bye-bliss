@@ -32,7 +32,18 @@ function Navbar() {
                         </div>
 
                         <div>
-                            Hello, { userName.name || " User"}
+                            Hello, { userName.name || " User "} !
+                            {
+                                userName?.name ? 
+                                (
+                                    <span className="" onClick={()=>{
+                                        localStorage.removeItem("user");
+                                        window.location.href='/login';
+                                    }}> Logout</span> 
+                                ) 
+                                : 
+                                null
+                            }
                         </div>
 
                  
