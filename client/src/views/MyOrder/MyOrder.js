@@ -2,7 +2,20 @@ import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 
 function MyOrder() {
-    
+       const [userName, setuserName] = useState('');
+
+       useEffect(()=>{
+        const storageUser = JSON.parse(localStorage.getItem('user') || '{}');
+        if(storageUser?.email){
+            if(storageUser?.email){
+                setuserName(storageUser);
+            }
+        }
+        else{
+         alert('You are already Logged in!');
+          window.location.href='/login';
+        }
+      },[]);
 
     return (
         <div>
