@@ -60,7 +60,7 @@ function SignUp() {
     <>
       <section class="form mx-5 my-4 ">
         <div class="container">
-          <div class="row border shadow no-gutters">
+          <div class="row border shadow ">
             <div class="col-lg-6">
               <img
                 src={SignUpImg}
@@ -136,21 +136,21 @@ function SignUp() {
                         setGender("male");
                       }}
                     />
-                    <label htmlFor="male">Male</label>
+                    <label htmlFor="male"> Male</label>
                   </div>
 
-                  <div className="mt-3">
+                  <div>
                     <input
                       type="radio"
                       id="female"
                       name="gender"
-                      className="gender"
+                      className="gender mt-3"
                       checked={gender === "female"}
                       onClick={() => {
                         setGender("female");
                       }}
                     />
-                    <label htmlFor="female">Female</label>
+                    <label htmlFor="female"> Female</label>
                   </div>
                 </div>
 
