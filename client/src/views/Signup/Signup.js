@@ -62,40 +62,52 @@ function SignUp() {
   }
   return (
     <>
+    <section class="form mx-5 my-4 ">
+        <div class="container ">
+          <div class="row  border shadow no-gutters">
+            <div class="col-lg-6">
+              {/* <img
+                src={SignupImg}
+                alt="dog"
+                class="img-fluid d-block mx-auto"
+                style={{ width: "500px" }}
+              /> */}
+            </div>
+            <div class="col-lg-6 pt-5 px-5"></div>
 
             <h2 className="text-center">SignUp </h2>
                 <form>
-                  <div className="">
+                  <div className="mt-3">
                     <input
                       type="text"
                       className="form-control"
                       id="fullName"
-                      placeholder="enter your fullname"
+                      placeholder="Enter your Name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </div>
-                  <div className="">
+                  <div className="mt-3">
                     <input
                       type="email"
                       className="form-control"
                       id="email"
-                      placeholder="enter your email"
+                      placeholder="Enter your Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <div className="">
+                  <div className="mt-3">
                     <input
                       type="password"
                       className="form-control"
                       id="password"
-                      placeholder="enter your password"
+                      placeholder="Enter your password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  <div className="">
+                  <div className="mt-3">
                     <input
                       type="phone"
                       className="form-control"
@@ -105,12 +117,12 @@ function SignUp() {
                       onChange={(e) => setMobile(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3">
+                  <div className="mt-3">
                     <input
                       type="text"
                       className="form-control"
                       id="address"
-                      placeholder="Enter your address"
+                      placeholder="Enter your Address"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />
@@ -121,7 +133,7 @@ function SignUp() {
                         type="radio"
                         id="male"
                         name="gender"
-                        className="gender"
+                        className="mt-3"
                         checked={gender === "male"}
                         onClick={() => {
                           setGender("male");
@@ -130,7 +142,7 @@ function SignUp() {
                       <label htmlFor="male">Male</label>
                     </div>
 
-                    <div>
+                    <div className="mt-3">
                       <input
                         type="radio"
                         id="female"
@@ -147,11 +159,14 @@ function SignUp() {
 
                   <button
                     type="button"
-                    className="btn"
+                    className="btn btn-primary  my-5 px-4 d-block mx-auto"
                     onClick={signupUser}>
-                    <b>Signup</b>
+                    <b>SignUp</b>
                   </button>
                 </form>
+                </div>
+          </div>
+      </section>
             
     </>
   );
