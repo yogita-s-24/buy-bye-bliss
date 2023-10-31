@@ -3,6 +3,7 @@ import axios from "axios";
 import showToast from "crunchy-toast";
 import "./Signup.css";
 import SignUpImg from "./../Signup/shopping.png";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -160,6 +161,9 @@ function SignUp() {
                   onClick={signupUser}>
                   <b>SignUp</b>
                 </button>
+                <p className="text-center">
+                  <Link to='/login'>Already have an account?</Link>
+                </p>
               </form>
               </div>
             
