@@ -74,12 +74,12 @@ function SignUp() {
     <Navbar/>
       <section class="form mx-3 my-4">
         <div class="container">
-          <div class="row rounded-3 shadow bg-light" style={{border:"1px solid grey "}}>
+          <div class="row rounded-3 shadow" style={{border:"1px solid grey ", backgroundColor:'#ffffff'}}>
             <div class="col-lg-6">
               <img
                 src={SignUpImg}
                 alt="dog"
-                class="img-fluid d-block mx-auto mt-5"
+                class="img-fluid d-block mx-auto mt-5 signin-image"
                 style={{ width: "450px" }}
               />
             </div>

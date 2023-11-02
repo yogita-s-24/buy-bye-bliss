@@ -6,6 +6,7 @@ import Signup from './views/Signup/Signup';
 import Login from './views/Login/Login';
 import Home from './views/Home/Home';
 import MyOrder from './views/MyOrder/MyOrder';
+import BuyPage from './views/BuyPage/BuyPage';
 
 //bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
         path : '/myorder',
         element : <MyOrder/>
     },
+
 
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,0 +1,16 @@
+@media screen and (max-width: 768px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar-link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .navbar-user-container {
+    margin-top: 20px;
+  }
+}
