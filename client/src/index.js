@@ -29,7 +29,10 @@ const router = createBrowserRouter([
         path : '/myorder',
         element : <MyOrder/>
     },
-
+    {
+        path: '/buy/:_id',
+        element:<BuyPage/>
+    }
 
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));

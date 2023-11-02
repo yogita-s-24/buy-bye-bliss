@@ -26,7 +26,7 @@ useEffect (()=>{
             <section className='d-flex justify-content-evenly mt-5'>
                 {
                     products?.map((product, index)=>{
-                        const {name, description, image, price} = product;
+                        const {_id, name, description, image, price} = product;
                         return(
                             <ProductCard
                              key={index} 
@@ -34,6 +34,7 @@ useEffect (()=>{
                              description={description}
                              image={image}
                              price={price}
+                             _id={ _id }
                              />
                         )
                     })
