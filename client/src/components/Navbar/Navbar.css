@@ -1,16 +1,22 @@
+.navbar {
+  align-items: center !important;
+}
+
 @media screen and (max-width: 768px) {
   .navbar {
     display: flex;
     flex-direction: column;
+    align-items: start ! important;
   }
 
   .navbar-link-container {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: start !important;
   }
 
   .navbar-user-container {
     margin-top: 20px;
+    cursor: pointer;
   }
 }
