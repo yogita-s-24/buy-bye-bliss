@@ -9,6 +9,7 @@ function BuyPage() {
 
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
+    const [shippingAddress, setShippingAddress] = useState('');
 
     const loadProductData = async () => {
         if (!_id) {
@@ -37,6 +38,23 @@ function BuyPage() {
         setQuantity(quantity+1);
     }
 
+    const placeOrder = async ()=>{
+        const currentUser = JSON.parse(localStorage.getItem("User") || '{}');
+
+        const orderDetails = {
+            user : currentUser._id,
+            product: _id,
+            quantity: quantity,
+            shippingAddress: shippingAddress
+        }
+
+        const response = await axios.post('/order', orderDetails);
+        alert('Your Order has been placed successfully!')
+        if(response?.data?.data){
+            window.location.href='/orders'
+        }
+    } 
+
     return (
         <div>
             <Navbar />
@@ -56,12 +74,22 @@ function BuyPage() {
                         <span className='quantity-text fs-3'>{quantity}</span>
                         <span className='btn-increase-quantity shadow p-1 mx-2' onClick={incQuantity}>➕</span>
                     </div>
+                    <div>
+                    <input type="text" 
+                    className='mt-3 input-box-field shadow' 
+                    placeholder='Enter Your Shipping Address'
+                    onChange={(e)=>{
+                        setShippingAddress(e.target.value)
+                    }}
+                    />
+
+                    </div>
                     </div>
 
 
                 </div>
                 <div className='text-center'>
-                    <button className='btn btn-primary px-5'>Order</button>
+                    <button className='btn btn-primary px-5'onClick={placeOrder}>Place Order</button>
                 </div>
             </div>
         </div>

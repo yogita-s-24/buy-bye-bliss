@@ -36,10 +36,19 @@
 }
 
 .btn-container{
+    display: 1;
+ margin: 0 auto;
  background-color: #fff;
  border-radius: 5px;
 }
 
+.input-box-field{
+    width: 400px;
+    padding: 20px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid lightgrey !important;
+}
 @media screen and (max-width:768px) {
     .buy-product-container{
         padding: 10px;     
