@@ -9,6 +9,11 @@ function MyOrder() {
   const [userName, setuserName] = useState("");
   const [orders, setOrder] = useState([]);
 
+ const STATUS_BATCH_MAP ={
+    "pending" : "bg-danger",
+    "delivered" : "bg-success",
+    "shipped" : "bg-warning"
+  }
 
   const loadProductData = async () => {
     const localUserId = userName._id;
@@ -56,7 +61,7 @@ function MyOrder() {
                   {quantity} x {product.price} = ₹{quantity * product.price}
                 </p>
                 <p>Delivery Charges: Rs{deliveryCharges}</p>
-                <p className="show-status">{status}</p>
+                <p className={`show-status ${STATUS_BATCH_MAP[status]}`}>{status}</p>
               </div>
             </div>
           );

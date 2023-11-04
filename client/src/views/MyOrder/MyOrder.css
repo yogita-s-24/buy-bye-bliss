@@ -1,9 +1,9 @@
 .order-container {
-  border-radius: 15px;
+  border-radius: 10px;
   width: 600px;
   background-color: #fff;
   margin: 10px;
-  box-shadow: 0 0 10px rgba(1, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(1, 0, 0, 0.1);
   padding: 0 10px;
   position: relative;
 }
@@ -21,7 +21,10 @@
 
 .show-status{
     position: absolute;
-    bottom: 5px;
-    right: 10px;
-    
+    top: 0;
+    right: 0px;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 0 5px ;
+
 }
