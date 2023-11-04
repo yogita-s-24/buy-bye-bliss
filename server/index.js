@@ -241,7 +241,8 @@ app.get("/order/:id", async (req, res) => {
   //This not show in order
   findOrder.user.password = undefined;
 
-  res.json({
+  res
+    .json({
       success: true,
       data: findOrder,
       message: "Order successfully found",
@@ -252,24 +253,27 @@ app.get("/order/:id", async (req, res) => {
 //GET - /orders/user/:id
 //how many orders are ordered by one user
 
-app.get("/order/user/:id", async (req, res) => { 
-  const { id } = req.params;
-  const ordersByUserId = await Order.find({user : id}).populate("user product");
+app.get("/order/user/:_id", async (req, res) => {
+  const { _id } = req.params;
+  const ordersByUserId = await Order.find({ user: _id }).populate(
+    "user product"
+  );
 
   res.json({
     success: true,
-    count: ordersByUserId,
-    message: "Orders by User ID"
-  })
+    data: ordersByUserId,
+    message: "Orders by User ID",
+  });
 });
 
 //PATCH - /order/status/:id
 app.patch("/order/status/:id", async (req, res) => {
   const { id } = req.params;
-  const {status} = req.body;
+  const { status } = req.body;
 
- await Order.updateOne(
-    { _id: id }, { $set: {status:status} }).populate("user product");
+  await Order.updateOne({ _id: id }, { $set: { status: status } }).populate(
+    "user product"
+  );
 
   res.json({
     success: true,

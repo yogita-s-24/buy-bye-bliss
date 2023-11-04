@@ -1,0 +1,27 @@
+.order-container {
+  border-radius: 15px;
+  width: 600px;
+  background-color: #fff;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(1, 0, 0, 0.1);
+  padding: 0 10px;
+  position: relative;
+}
+
+.order-product-image {
+  height: 170px;
+  background-color: bisque;
+}
+
+.main-container {
+  display: flex;
+  justify-content:space-around;
+  flex-wrap: wrap;
+}
+
+.show-status{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    
+}
