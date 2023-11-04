@@ -10,7 +10,7 @@ function BuyPage() {
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [shippingAddress, setShippingAddress] = useState("");
-    const [deliverycharges, setDeliveryCharges] = useState(0);
+    const [deliveryCharges, setDeliveryCharges] = useState(0);
 
     const loadProductData = async () => {
         if (!_id) {
@@ -45,12 +45,14 @@ function BuyPage() {
             product: _id,
             quantity: quantity,
             shippingAddress: shippingAddress,
+            deliveryCharges: deliveryCharges,
+            price : product.price
         };
 
         const response = await axios.post("/order", orderDetails);
         alert("Your Order has been placed successfully!");
         if (response?.data?.data) {
-            window.location.href = "/orders";
+            window.location.href='/myorder';
         }
     };
 
@@ -94,7 +96,7 @@ function BuyPage() {
                                     id="40"
                                     name=""
                                     className="me-1"
-                                    checked={deliverycharges === 40}
+                                    checked={deliveryCharges === 40}
                                     onClick={() => {
                                         setDeliveryCharges(40);
                                     }}
@@ -108,7 +110,7 @@ function BuyPage() {
                                     id="100"
                                     name=""
                                     className=" me-1"
-                                    checked={deliverycharges === 100}
+                                    checked={deliveryCharges === 100}
                                     onClick={() => {
                                         setDeliveryCharges(100);
                                     }}
