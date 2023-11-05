@@ -193,7 +193,7 @@ app.put("/product/:id", async (req, res) => {
 app.get("/search", async (req, res) => {
   const { q } = req.query;
 
-  const productSearch = await Product.findOne({
+  const productSearch = await Product.find({
     name: { $regex: q, $options: "i" },
   });
 
